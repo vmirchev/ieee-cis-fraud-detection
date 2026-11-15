@@ -1,0 +1,3 @@
+raw_data_paths:
+  transaction: data/01_raw/train_transaction.csv
+  identity: data/01_raw/train_identity.csv

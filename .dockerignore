@@ -1,0 +1,9 @@
+.venv
+.git
+.pytest_cache
+.coverage
+**/__pycache__
+data
+notebooks
+docs
+docker/kedro/output

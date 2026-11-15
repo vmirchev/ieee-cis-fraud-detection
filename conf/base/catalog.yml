@@ -1,0 +1,208 @@
+# Here you can define all your data sets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+#
+# We support interacting with a variety of data stores including local file systems, cloud, network and HDFS
+#
+# An example data set definition can look as follows:
+#
+#bikes:
+#  type: pandas.CSVDataset
+#  filepath: "data/01_raw/bikes.csv"
+#
+#weather:
+#  type: spark.SparkDataset
+#  filepath: s3a://your_bucket/data/01_raw/weather*
+#  file_format: csv
+#  credentials: dev_s3
+#  load_args:
+#    header: True
+#    inferSchema: True
+#  save_args:
+#    sep: '|'
+#    header: True
+#
+#scooters:
+#  type: pandas.SQLTableDataset
+#  credentials: scooters_credentials
+#  table_name: scooters
+#  load_args:
+#    index_col: ['name']
+#    columns: ['name', 'gear']
+#  save_args:
+#    if_exists: 'replace'
+#    # if_exists: 'fail'
+#    # if_exists: 'append'
+#
+# The Data Catalog supports being able to reference the same file using two different Dataset implementations
+# (transcoding), templating and a way to reuse arguments that are frequently repeated. See more here:
+# https://docs.kedro.org/en/stable/data/data_catalog.html
+
+train_transaction:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/train_transaction.csv
+
+train_identity:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/train_identity.csv
+
+optimized_train:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/optimized_train.parquet
+
+selected_v_features:
+  type: json.JSONDataset
+  filepath: data/03_primary/selected_v_features.json
+
+selected_id_features:
+  type: json.JSONDataset
+  filepath: data/03_primary/selected_id_features.json
+
+feature_selection_report:
+  type: json.JSONDataset
+  filepath: data/08_reporting/feature_selection_report.json
+
+feature_engineered_train:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/feature_engineered_train.parquet
+
+X_train:
+    type: pandas.ParquetDataset
+    filepath: data/05_model_input/X_train.parquet
+
+X_test:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/X_test.parquet
+
+y_train:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/y_train.parquet
+
+y_test:
+  type: pandas.ParquetDataset
+  filepath: data/05_model_input/y_test.parquet
+
+split_summary:
+  type: json.JSONDataset
+  filepath: data/08_reporting/split_summary.json
+
+baseline_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/baseline_model.pkl
+  versioned: true
+
+numeric_model_features:
+  type: json.JSONDataset
+  filepath: data/07_model_output/numeric_model_features.json
+
+baseline_metrics:
+  type: json.JSONDataset
+  filepath: data/07_model_output/baseline_metrics.json
+  versioned: true
+
+baseline_model_metadata:
+  type: json.JSONDataset
+  filepath: data/07_model_output/baseline_model_metadata.json
+  versioned: true
+
+baseline_predictions:
+  type: pandas.ParquetDataset
+  filepath: data/07_model_output/baseline_predictions.parquet
+
+baseline_threshold_report:
+  type: json.JSONDataset
+  filepath: data/07_model_output/baseline_threshold_report.json
+  versioned: true
+
+# TREE MODEL
+tree_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/tree_model.pkl
+  versioned: true
+
+tree_model_metrics:
+  type: json.JSONDataset
+  filepath: data/07_model_output/tree_metrics.json
+  versioned: true
+
+tree_model_metadata:
+  type: json.JSONDataset
+  filepath: data/07_model_output/tree_model_metadata.json
+  versioned: true
+
+tree_model_predictions:
+  type: pandas.ParquetDataset
+  filepath: data/07_model_output/tree_predictions.parquet
+
+tree_threshold_report:
+  type: json.JSONDataset
+  filepath: data/07_model_output/tree_threshold_report.json
+  versioned: true
+
+model_comparison:
+  type: json.JSONDataset
+  filepath: data/07_model_output/model_comparison.json
+  versioned: true
+
+final_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/final_model.pkl
+  versioned: true
+
+final_model_threshold:
+  type: json.JSONDataset
+  filepath: data/07_model_output/final_model_threshold.json
+  versioned: true
+
+categorical_model_features:
+  type: json.JSONDataset
+  filepath: data/07_model_output/categorical_model_features.json
+
+lightgbm_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/lightgbm_model.pkl
+  versioned: true
+
+lightgbm_predictions:
+  type: pandas.ParquetDataset
+  filepath: data/07_model_output/lightgbm_predictions.parquet
+
+lightgbm_metrics:
+  type: json.JSONDataset
+  filepath: data/07_model_output/lightgbm_metrics.json
+  versioned: true
+
+lightgbm_model_metadata:
+  type: json.JSONDataset
+  filepath: data/07_model_output/lightgbm_model_metadata.json
+  versioned: true
+
+lightgbm_threshold_report:
+  type: json.JSONDataset
+  filepath: data/07_model_output/lightgbm_threshold_report.json
+  versioned: true
+
+xgboost_model:
+  type: pickle.PickleDataset
+  filepath: data/06_models/xgboost_model.pkl
+  versioned: true
+
+xgboost_predictions:
+  type: pandas.ParquetDataset
+  filepath: data/07_model_output/xgboost_predictions.parquet
+
+xgboost_metrics:
+  type: json.JSONDataset
+  filepath: data/07_model_output/xgboost_metrics.json
+  versioned: true
+
+xgboost_model_metadata:
+  type: json.JSONDataset
+  filepath: data/07_model_output/xgboost_model_metadata.json
+  versioned: true
+
+xgboost_threshold_report:
+  type: json.JSONDataset
+  filepath: data/07_model_output/xgboost_threshold_report.json
+  versioned: true
